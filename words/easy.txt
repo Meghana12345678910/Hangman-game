@@ -1,0 +1,10 @@
+apple
+beach
+chair
+grape
+house
+plant
+river
+sheep
+stone
+water

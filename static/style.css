@@ -1,0 +1,64 @@
+:root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #24362d; background: #f5f3eb; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 940px; margin: auto; padding: 48px 24px 24px; }
+header { margin-bottom: 30px; }
+.eyebrow { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .18em; color: #5a6b59; margin: 0 0 12px; }
+h1 { font-family: Georgia, serif; font-size: clamp(3rem, 7vw, 4.5rem); line-height: 1; font-weight: 500; letter-spacing: -.06em; margin: 0 0 16px; }
+h1 span { color: #cc633c; }
+.intro, .hint, .caption, footer { color: #626b60; }
+.intro { line-height: 1.6; margin: 0; }
+.game { background: #fffef9; border: 1px solid #dbdfd2; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 30px #24362d05; }
+.toolbar { display: flex; justify-content: space-between; align-items: end; gap: 16px; padding: 22px 28px; border-bottom: 1px solid #e5e7dc; }
+label { display: flex; gap: 12px; align-items: center; font-size: .85rem; font-weight: 600; }
+select, button { font: inherit; }
+select { border: 1px solid #c8cebf; border-radius: 8px; padding: 10px 28px 10px 12px; color: inherit; background: #fffef9; min-height: 44px; }
+button { cursor: pointer; border-radius: 8px; min-height: 44px; }
+button:focus-visible, select:focus-visible { outline: 3px solid #cc633c; outline-offset: 3px; }
+.primary { background: #294d3c; color: #fffef9; border: 1px solid #294d3c; padding: 12px 20px; font-weight: 600; }
+.primary span { margin-left: 16px; }
+.primary:hover:not(:disabled) { background: #1a392b; }
+button:disabled { cursor: default; }
+.primary:disabled, select:disabled { opacity: .65; }
+.play-area { display: grid; grid-template-columns: 1fr 1.3fr; padding: 26px 28px; align-items: center; gap: 28px; }
+.illustration { text-align: center; background: #f3f4eb; border-radius: 12px; padding: 10px; }
+svg { width: 100%; max-width: 225px; height: 225px; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4; }
+.scaffold { stroke: #a2ad95; }
+.figure { stroke: #294d3c; }
+[hidden] { display: none !important; }
+.caption { font-size: .72rem; margin: 0 0 10px; }
+.word-area { min-width: 0; }
+#pattern { font-family: ui-monospace, monospace; font-size: clamp(1.35rem, 4vw, 2rem); line-height: 1.8; letter-spacing: .07em; overflow-wrap: anywhere; margin: 10px 0; }
+#remaining { font-weight: 600; font-size: .88rem; }
+#message { line-height: 1.6; font-size: .92rem; color: #626b60; min-height: 3em; }
+#answer { font-weight: 700; overflow-wrap: anywhere; }
+#error { background: #fff0e8; color: #963d20; border-radius: 8px; padding: 12px; line-height: 1.5; }
+.keyboard-area { padding: 0 28px 14px; }
+#keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; max-width: 660px; margin: auto; }
+.letter { width: 44px; background: #fffef9; color: #294d3c; border: 1px solid #c8cebf; font-weight: 600; }
+.letter:hover:not(:disabled) { background: #ecf0e3; border-color: #294d3c; }
+.letter:disabled { color: #9b9f93; background: #f2f2ea; border-color: #e4e5db; }
+.letter.correct { color: #fff; background: #43664c; border-color: #43664c; }
+.letter.incorrect { color: #8b6655; background: #f2e7df; border-color: #e3d4c8; text-decoration: line-through; }
+.hint { text-align: center; font-size: .75rem; margin: 14px 0 4px; }
+.history { border-top: 1px solid #e5e7dc; padding: 12px 28px; display: flex; gap: 30px; flex-wrap: wrap; }
+.history p { font-size: .75rem; color: #626b60; margin: 6px 0; }
+.history span { color: #24362d; margin-left: 8px; overflow-wrap: anywhere; }
+footer { text-align: center; font-size: .75rem; padding: 24px 0; }
+@media (max-width: 560px) {
+  main { padding: 28px 12px 12px; }
+  header { padding: 0 8px; margin-bottom: 22px; }
+  .toolbar { padding: 16px; gap: 10px; }
+  label { flex-direction: column; align-items: start; gap: 5px; }
+  .primary { padding: 12px; }
+  .primary span { margin-left: 8px; }
+  .play-area { grid-template-columns: 1fr; padding: 16px; gap: 18px; }
+  svg { height: 155px; }
+  .caption { display: none; }
+  .word-area { text-align: center; }
+  #message { min-height: 0; }
+  .keyboard-area { padding: 0 12px 14px; }
+  #keyboard { gap: 5px; }
+  .letter { width: 44px; }
+  .history { padding: 12px 16px; gap: 8px 20px; }
+}

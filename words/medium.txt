@@ -1,0 +1,10 @@
+blanket
+compass
+dolphin
+journey
+lantern
+orchard
+penguin
+thunder
+trumpet
+village
