@@ -68,8 +68,8 @@ blocking defects, and a fresh local setup works using only the README.
 ## Phase 6 — GitHub Delivery
 
 - [x] Initialize or verify Git, add an appropriate `.gitignore`, and exclude virtual environments, caches, and secrets.
-- [ ] Review the required assignment files, commit the verified work, and push to the intended GitHub repository.
-- [ ] Clone from GitHub into a clean location, install dependencies, run tests, and confirm browser play using the README.
+- [x] Review the required assignment files, commit the verified work, and push to the intended GitHub repository.
+- [x] Clone from GitHub into a clean location, install dependencies, run tests, and confirm browser play using the README.
 
 **Checkpoint:** The GitHub version reproduces the tested local application.
 
