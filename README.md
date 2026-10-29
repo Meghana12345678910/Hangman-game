@@ -145,3 +145,62 @@ Manual browser checklist (start the local server first):
     again; check that controls and the six-life state reset.
 
 See `TODO.md` for the phased reduced assignment scope.
+
+## Cloud deployment — Phase 7
+
+Deployment status: configuration prepared; no service or public HTTPS URL has
+been verified yet. Public API/browser checks and Render log review remain pending.
+
+The repository includes a [Render Blueprint](https://render.com/docs/blueprint-spec)
+in `render.yaml`. It runs the API, browser assets, and word lists as one Python
+web service connected to this repository's `main` branch. The configured service
+uses the Free plan and one instance. `.python-version` selects Python 3.14.2.
+
+| Setting | Value |
+|---|---|
+| Build command | `pip install -r requirements.txt` |
+| Start command | `python production.py` |
+| Health check | `/` |
+| Port | Render's `PORT` environment variable; local default `10000` |
+| WSGI server | Waitress, one process and one request thread, debug disabled |
+
+To check the production startup locally in PowerShell:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+$env:PORT = '10000'
+.\.venv\Scripts\python.exe production.py
+```
+
+Open `http://127.0.0.1:10000/`. Stop with Ctrl+C. The existing `server.py`
+development command continues to work on port 5000.
+
+To deploy after these files are pushed:
+
+1. Sign in to [Render](https://dashboard.render.com), connect GitHub, and choose
+   New > Blueprint for `Meghana12345678910/Hangman-game`, branch `main`.
+2. Review `render.yaml` and create the service. If using New > Web Service
+   instead, choose Python, Free, and the build/start commands above; retain one
+   instance and the Python version from `.python-version`.
+3. Wait for a successful deploy. Copy the actual HTTPS URL from the service
+   dashboard into this section; do not assume it matches the configured name.
+   Record the deployed Git commit shown in the dashboard.
+4. Open that URL and repeat the manual browser checklist above. Check Easy,
+   Medium, and Hard; finish a win and a loss and start another game. Inspect
+   Network responses for no hidden answer during play. Run the README HTTP
+   examples with the public base URL, including invalid inputs and unknown IDs.
+5. Review the Render Events and Logs for build/start failures, tracebacks, and
+   request failures. Waitress logs startup and errors, not request bodies or
+   hidden words. Record observed results and cold-start timing here.
+
+All games are in memory. A restart, redeploy, or service sleep clears them;
+clients with old game IDs receive 404 and must choose New Game. Do not scale
+above one instance/process. Concurrent requests are serialized by the existing
+game lock. No database or persistent storage is introduced in this phase.
+
+[Render's Free service documentation](https://render.com/docs/free) describes
+spin-down after 15 minutes without traffic and a wake-up delay of about a minute.
+This is provider guidance, not an observed timing for this application. Open the
+browser page and wait for the service to wake before starting a game. Public
+deployment, log review, and measured cold-start behavior require Render account
+access and remain unverified until a service is created.

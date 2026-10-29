@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: hangman-assignment
+    runtime: python
+    repo: https://github.com/Meghana12345678910/Hangman-game
+    branch: main
+    plan: free
+    numInstances: 1
+    buildCommand: pip install -r requirements.txt
+    startCommand: python production.py
+    healthCheckPath: /
