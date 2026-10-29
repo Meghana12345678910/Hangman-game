@@ -148,8 +148,22 @@ See `TODO.md` for the phased reduced assignment scope.
 
 ## Cloud deployment — Phase 7
 
-Deployment status: configuration prepared; no service or public HTTPS URL has
-been verified yet. Public API/browser checks and Render log review remain pending.
+Public application: https://hangman-game-z3k6.onrender.com/
+
+Verified on October 29, 2026 against deployed application commit `0a15cae`
+(commit and successful Waitress startup confirmed by the service owner in Render).
+The served HTML, JavaScript, and CSS match the source for that deployment.
+Live HTTPS checks passed for all three difficulties, physical and on-screen
+keyboards, correct and incorrect guesses, wins/losses, New Game reset, JSON API
+responses, rejected inputs, and hidden-answer protection. Chrome viewport checks
+passed at 1280px, 390px, and 320px, with no horizontal overflow or JavaScript errors.
+No runtime code fix was required.
+
+Initial HTTPS response during verification: 0.43 seconds. This was not a controlled
+idle cold-start measurement. The owner confirmed successful production startup
+without startup errors; private Render logs were not directly accessible to the
+verification process. Live requests returned expected statuses without unexpected
+server errors. Process restart clearing games is covered by local production tests.
 
 The repository includes a [Render Blueprint](https://render.com/docs/blueprint-spec)
 in `render.yaml`. It runs the API, browser assets, and word lists as one Python
@@ -175,7 +189,7 @@ $env:PORT = '10000'
 Open `http://127.0.0.1:10000/`. Stop with Ctrl+C. The existing `server.py`
 development command continues to work on port 5000.
 
-To deploy after these files are pushed:
+To recreate the deployment:
 
 1. Sign in to [Render](https://dashboard.render.com), connect GitHub, and choose
    New > Blueprint for `Meghana12345678910/Hangman-game`, branch `main`.
@@ -200,7 +214,20 @@ game lock. No database or persistent storage is introduced in this phase.
 
 [Render's Free service documentation](https://render.com/docs/free) describes
 spin-down after 15 minutes without traffic and a wake-up delay of about a minute.
-This is provider guidance, not an observed timing for this application. Open the
-browser page and wait for the service to wake before starting a game. Public
-deployment, log review, and measured cold-start behavior require Render account
-access and remain unverified until a service is created.
+This is provider guidance, not an observed cold-start timing for this application.
+Open the browser page and wait for the service to wake before starting a game.
+Real-phone touch testing, an idle wake-up measurement, and a public-service restart
+check remain optional manual operational checks; they are not claimed as automated
+verification results.
+
+Repeat the opt-in live tests only against a service you own (they create in-memory
+games). With `requirements-dev.txt` installed and Google Chrome available:
+
+```powershell
+$env:HANGMAN_DEPLOYMENT_URL = 'https://hangman-game-z3k6.onrender.com'
+.\.venv\Scripts\python.exe -m unittest discover -s tests -p test_live_deployment.py -v
+```
+
+Use `-m unittest discover -s tests -v` with the same environment variable to run
+both the complete local suite and the live verification. With the variable unset,
+the three live tests are skipped so normal development never contacts a deployment.

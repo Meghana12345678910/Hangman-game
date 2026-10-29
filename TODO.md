@@ -75,11 +75,11 @@ blocking defects, and a fresh local setup works using only the README.
 
 ## Phase 7 — Cloud Deployment
 
-- [ ] Prepare a Python cloud web service connected to GitHub (Render is the transcript's example); document the chosen service's build/start settings.
+- [x] Prepare a Python cloud web service connected to GitHub (Render is the transcript's example); document the chosen service's build/start settings.
 - [x] Use a production WSGI server with debug disabled and the host-provided port. Run one worker/instance while games are stored in memory.
-- [ ] Deploy Flask and the browser together, including the word lists and static assets; record the public HTTPS URL in the README.
-- [ ] Smoke-test the deployed browser and all three API routes: each difficulty, win/loss, restart, invalid requests, and hidden-word protection.
-- [ ] Check deployment logs for startup/request failures and document that restarts clear games, plus any observed cold-start behavior.
+- [x] Deploy Flask and the browser together, including the word lists and static assets; record the public HTTPS URL in the README.
+- [x] Smoke-test the deployed browser and all three API routes: each difficulty, win/loss, restart, invalid requests, and hidden-word protection.
+- [x] Check deployment logs for startup/request failures and document that restarts clear games, plus any observed cold-start behavior.
 
 **Checkpoint:** A fresh browser can play a complete game at the public URL,
 remote API checks pass, and the documented GitHub revision matches the deployment.
